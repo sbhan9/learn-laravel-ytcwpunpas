@@ -5,9 +5,9 @@
             <div class="col-md-8">
                 <article class="mb-5">
                     <h2>{{ $post->title }}</h2>
-                    By. <a href="{{ url('/authors/' . $post->author->username) }}"
+                    By. <a href="{{ url('/posts?author=' . $post->author->username) }}"
                         class="text-decoration-none">{{ $post->author->name }}</a> in <a
-                        href="{{ url('/categories/' . $post->category->slug) }}"
+                        href="{{ url('/posts?category=' . $post->category->slug) }}"
                         class="text-decoration-none">{{ $post->category->name }}</a>
                     <img src="https://random.imagecdn.app/1200/400" class="mt-2 img-fluid"
                         alt="{{ $post->category->name }}">

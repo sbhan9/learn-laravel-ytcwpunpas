@@ -5,6 +5,12 @@
     <div class="row justify-content-center mb-3">
         <div class="col-md-6">
             <form action="{{ url('/posts') }}" method="get" autocomplete="off">
+                @if (request('category'))
+                    <input type="hidden" name="category" value="{{ request('category') }}">
+                @endif
+                @if (request('author'))
+                    <input type="hidden" name="author" value="{{ request('author') }}">
+                @endif
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" name="search" placeholder="search posts"
                         value="{{ request('search') }}">
@@ -20,7 +26,8 @@
             <div class="card-body text-center">
                 <h3 class="card-title"><a href="{{ url('/posts/' . $posts[0]->slug) }}"
                         class="text-decoration-none text-dark">{{ $posts[0]->title }}</a></h3>
-                <small class="text-muted">Creted by <a href="{{ url('/authors/' . $posts[0]->author->username) }}"
+                <small class="text-muted">Creted by <a
+                        href="{{ url('/posts?author=' . $posts[0]->author->username) }}"
                         class="text-decoration-none">{{ $posts[0]->author->name }}</a>
                     {{ $posts[0]->created_at->diffForHumans() }}</small>
                 <p class="card-text">{{ $posts[0]->excerpt }}</p>
@@ -35,7 +42,7 @@
                     <div class="col-md-4 mb-3">
                         <div class="card">
                             <div class="position-absolute bg-dark px-2 py-1 rounded"><a
-                                    href="{{ url('/categories/' . $post->category->slug) }}"
+                                    href="{{ url('/posts?category=' . $post->category->slug) }}"
                                     class="text-decoration-none text-white">{{ $post->category->name }}</a>
                             </div>
                             <img src="https://random.imagecdn.app/400/300/" class="card-img-top"
@@ -44,7 +51,7 @@
                                 <h5 class="card-title"><a href="{{ url('/posts/' . $post->slug) }}"
                                         class="text-decoration-none">{{ $post->title }}</a></h5>
                                 <small class="text-muted">Creted by <a
-                                        href="{{ url('/authors/' . $post->author->username) }}"
+                                        href="{{ url('/posts?author=' . $post->author->username) }}"
                                         class="text-decoration-none">{{ $post->author->name }}</a>
                                     {{ $post->created_at->diffForHumans() }}</small>
                                 <p class="card-text">{{ $post->excerpt }}</p>
@@ -58,4 +65,8 @@
     @else
         <p class="text-center fs-4">No post found</p>
     @endif
+
+    <div class="float-end">
+        {{ $posts->links() }}
+    </div>
 @endsection
