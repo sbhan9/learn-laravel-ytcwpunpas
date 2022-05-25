@@ -21,6 +21,12 @@
                         href="{{ url('/categories') }}">Categories</a>
                 </li>
             </ul>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a href="{{ url('/login') }}" class="nav-link"><i class="bi bi-box-arrow-in-right"></i>
+                        Login</a>
+                </li>
+            </ul>
         </div>
     </div>
 </nav>
